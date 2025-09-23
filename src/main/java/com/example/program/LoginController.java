@@ -79,6 +79,7 @@ public class LoginController {
         
         if (userRepo.existsById(id)){
             userRepo.deleteById(id);
+            session.setAttribute("loggedInUser",null);
             return "redirect:/?message=User deleted";
         } else{
             return "redirect:/?message=User not found";
