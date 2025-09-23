@@ -9,6 +9,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,6 +47,25 @@ public class LoginController {
         
         session.setAttribute("loggedInUser", username);
         return "redirect:/api/data";
+    }
+
+    @PostMapping("/auth/register")
+    public String register(
+        @RequestParam String username,
+        @RequestParam String password,
+        Model model) {
+
+        if (userRepo.findByUsername(username).isPresent()){
+            model.addAttribute("error", "UserExist");
+            return "index";
+        }
+        
+        User user = new User(username, password);
+
+        userRepo.save(user);
+
+        model.addAttribute("message", "Registered");
+        return "redirect-wait";
     }
 
     @DeleteMapping("/users/{id}/delete")
