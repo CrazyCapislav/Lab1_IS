@@ -18,9 +18,10 @@ public class DataController {
     private UserRepo userRepo;
     @GetMapping("/api/data")
     public String getData(HttpSession session, Model model) {
-        model.addAttribute("users", userRepo.findAll());
+        
         String currentUser = (String) session.getAttribute("loggedInUser");
         if (currentUser != null){
+            model.addAttribute("users", userRepo.findAll());
             var opt = userRepo.findByUsername(currentUser);
             if (opt.isPresent()){
                 model.addAttribute("currentUser",currentUser);
