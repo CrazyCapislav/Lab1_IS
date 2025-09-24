@@ -179,8 +179,8 @@ GET /
 - **Автоматические отчеты** загружаются как артефакты
 
 - **Успешный pipeline**: https://github.com/CrazyCapislav/Lab1_IS/actions/runs/17981472157
-- **SpotBugs**:(spotbugs.PNG)
-- **SCA**:(snyktest.PNG)
+- **SpotBugs**:[SpotBugs](spotbugs.PNG)
+- **SCA**:[Snyk](snyktest.PNG)
 
 ### Страницы ошибок
 - **redirect-error.html**: Общая страница ошибок
