@@ -8,6 +8,7 @@ package com.example.program;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,6 +29,10 @@ public class LoginController {
     @Autowired
     private UserRepo userRepo;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+
     @PostMapping("/auth/login")
     public String login(
         @RequestParam String username,
@@ -37,13 +42,14 @@ public class LoginController {
         Optional<User> userOpt = userRepo.findByUsername(username);
         
         if (userOpt.isEmpty()){
-            return "Invalid user";
+            return "redirect-error";
         }
         User user = userOpt.get();
 
-        if (!user.getPassword().equals(password)){
-            return "Invalid password";
+        if (!passwordEncoder.matches(password, user.getPassword())){
+            return "redirect-error";
         }
+
         
         session.setAttribute("loggedInUser", username);
         return "redirect:/api/data";
@@ -54,13 +60,15 @@ public class LoginController {
         @RequestParam String username,
         @RequestParam String password,
         Model model) {
+        
 
         if (userRepo.findByUsername(username).isPresent()){
             model.addAttribute("error", "UserExist");
             return "index";
         }
+
         
-        User user = new User(username, password);
+        User user = new User(username, passwordEncoder.encode(password));
 
         userRepo.save(user);
 
