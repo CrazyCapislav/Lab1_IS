@@ -27,9 +27,11 @@ jobs:
       run: ./gradlew spotbugsMain
       continue-on-error: true
       
-    - name: Зависимости
-      run: ./gradlew dependencyCheckAnalyze
+    - name: Snyk
+      uses: snyk/actions/gradle@master
       continue-on-error: true
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         
     - name: Сборка
       run: ./gradlew build
