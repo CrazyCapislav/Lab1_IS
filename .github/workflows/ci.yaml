@@ -1,0 +1,32 @@
+name: Безопасность
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  проверка:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Код
+      uses: actions/checkout@v4
+      
+    - name: Java
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+          
+    - name: SpotBugs
+      run: ./gradlew spotbugsMain
+      continue-on-error: true
+      
+    - name: Зависимости
+      run: ./gradlew dependencyCheckAnalyze
+      continue-on-error: true
+        
+    - name: Сборка
+      run: ./gradlew build

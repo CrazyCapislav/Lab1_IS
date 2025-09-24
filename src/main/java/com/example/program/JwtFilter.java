@@ -21,15 +21,21 @@ public class JwtFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         String path = req.getRequestURI();
         
-        if (path.startsWith("/api/") && !path.startsWith("/api/auth/login")) {
+        if ((path.startsWith("/api/") && !path.startsWith("/api/auth/login")) || path.equals("/data")) {
+            String token = null;
+            
+            
             String auth = req.getHeader("Authorization");
-            if (auth == null || !auth.startsWith("Bearer ")) {
-                res.sendRedirect("/redirect-error.html");
-                return;
+            if (auth != null && auth.startsWith("Bearer ")) {
+                token = auth.substring(7);
             }
             
-            String token = auth.substring(7);
-            if (!jwtUtil.validateToken(token)) {
+            
+            if (token == null) {
+                token = req.getParameter("token");
+            }
+            
+            if (token == null || !jwtUtil.validateToken(token)) {
                 res.sendRedirect("/redirect-error.html");
                 return;
             }

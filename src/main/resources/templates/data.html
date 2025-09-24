@@ -11,8 +11,8 @@
         </ul>
         <div th:if="${currentUser!=null}">
             <p>Current user: <span th:text="${currentUser}"></span></p>
-            <form th:action="@{'/users/' + ${currentUserId} + '/delete'}" method="post">
-                <input type="hidden" name="_method" value="delete"/>
+            <form action="/auth/delete" method="post">
+                <input type="hidden" name="username" th:value="${currentUser}"/>
                 <button type="submit">Удалить пользователя</button>
             </form>
         </div>

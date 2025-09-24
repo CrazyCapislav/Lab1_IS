@@ -1,24 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.example.program;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import org.springframework.stereotype.Component;
+import java.util.Date;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
-import java.util.Date;
-/**
- *
- * @author Rahim
- */
+
+import org.springframework.stereotype.Component;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.Jwts;
+
 @Component
 public class JwtUtil {
     
-    private static final String SECRET_KEY = "mySecretKey123456789012345678901234567890";
+    private static final String SECRET_KEY = "12345678901234567890123456789012";
     private static final long EXPIRATION_TIME = 24 * 60 * 60 * 1000;
     
     private SecretKey getSigningKey() {
@@ -54,7 +50,7 @@ public class JwtUtil {
                 .build()
                 .parseSignedClaims(token);
             return true;
-        } catch (Exception e) {
+        } catch (JwtException | IllegalArgumentException e) {
             return false;
         }
     }
