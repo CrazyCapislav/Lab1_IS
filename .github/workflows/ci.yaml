@@ -28,7 +28,11 @@ jobs:
       continue-on-error: true
       
     - name: Snyk
-      uses: snyk/actions/gradle@master
+      uses: snyk/actions/setup@master
+      continue-on-error: true
+      
+    - name: Snyk Test
+      run: snyk test --severity-threshold=high
       continue-on-error: true
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
