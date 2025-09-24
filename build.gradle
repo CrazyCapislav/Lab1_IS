@@ -42,9 +42,15 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
+configurations.all {
+	resolutionStrategy {
+		force 'org.apache.commons:commons-lang3:3.18.0'
+	}
+}
+
 
 spotbugs {
-	toolVersion = '4.8.6'
+	toolVersion = '4.9.4'
 	effort = 'max'
 	reportLevel = 'low'
 	ignoreFailures = true
