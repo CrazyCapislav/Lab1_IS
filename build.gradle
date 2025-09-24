@@ -77,6 +77,7 @@ spotbugsTest {
 dependencyCheck {
 	format = 'HTML'
 	outputDirectory = "$buildDir/reports/dependency-check"
-	suppressionFile = 'dependency-check-suppressions.xml'
 	skipConfigurations = ['checkstyle']
+	autoUpdate = false
+	skipUpdate = true
 }
