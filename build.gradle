@@ -42,7 +42,7 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-// SpotBugs Configuration
+
 spotbugs {
 	toolVersion = '4.8.3'
 	effort = 'max'
