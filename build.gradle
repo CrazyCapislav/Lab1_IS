@@ -79,5 +79,5 @@ dependencyCheck {
 	outputDirectory = "$buildDir/reports/dependency-check"
 	skipConfigurations = ['checkstyle']
 	autoUpdate = false
-	skipUpdate = true
+	updateOnly = false
 }
