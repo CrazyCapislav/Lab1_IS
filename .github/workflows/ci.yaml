@@ -27,15 +27,31 @@ jobs:
       run: ./gradlew spotbugsMain
       continue-on-error: true
       
+    - name: Загрузить отчет SpotBugs
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: spotbugs-report
+        path: build/reports/spotbugs/
+        retention-days: 30
+      
     - name: Snyk
       uses: snyk/actions/setup@master
       continue-on-error: true
       
     - name: Snyk Test
-      run: snyk test --severity-threshold=high
+      run: snyk test --severity-threshold=high --json-file-output=snyk-report.json
       continue-on-error: true
       env:
         SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        
+    - name: Загрузить отчет Snyk
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: snyk-report
+        path: snyk-report.json
+        retention-days: 30
         
     - name: Сборка
       run: ./gradlew build
