@@ -1,5 +1,6 @@
 package com.example.program;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 import javax.crypto.SecretKey;
@@ -18,7 +19,7 @@ public class JwtUtil {
     private static final long EXPIRATION_TIME = 24 * 60 * 60 * 1000;
     
     private SecretKey getSigningKey() {
-        return new SecretKeySpec(SECRET_KEY.getBytes(), "HmacSHA256");
+        return new SecretKeySpec(SECRET_KEY.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
     }
     
     public String generateToken(String username) {
