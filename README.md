@@ -178,6 +178,9 @@ GET /
 - **SCA**: Snyk для проверки уязвимостей в зависимостях
 - **Автоматические отчеты** загружаются как артефакты
 
+- **Успешный pipeline**: https://github.com/CrazyCapislav/Lab1_IS/actions/runs/17981472157
+- **SpotBugs**:(spotbugs.PNG)
+- **SCA**:(snyktest.PNG)
 
 ### Страницы ошибок
 - **redirect-error.html**: Общая страница ошибок
