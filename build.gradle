@@ -35,6 +35,7 @@ repositories {
 		runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.6'
 		runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.6'
 		implementation 'org.springframework.security:spring-security-crypto:6.3.8'
+		implementation 'org.apache.commons:commons-lang3:3.18.0'
 	}
 
 tasks.named('test') {
@@ -43,7 +44,7 @@ tasks.named('test') {
 
 
 spotbugs {
-	toolVersion = '4.9.4'
+	toolVersion = '4.8.6'
 	effort = 'max'
 	reportLevel = 'low'
 	ignoreFailures = true
