@@ -73,7 +73,7 @@ spotbugsTest {
 	}
 }
 
-// OWASP Dependency Check Configuration
+
 dependencyCheck {
 	format = 'HTML'
 	outputDirectory = "$buildDir/reports/dependency-check"
